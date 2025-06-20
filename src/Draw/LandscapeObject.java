@@ -18,7 +18,10 @@ import java.awt.Graphics2D;
  * @version 1.0
  * @since 2019-11-26
  */
+
+// Added for Lab 6c: Draw Tree
 public abstract class LandscapeObject {
+
 	//Attributes
 	private int startX;			//Starting x coordinate for the object.  This doesn't change once the object has been created.
 	private int startY;			//Starting y coordinate for the object.  This doesn't change once the object has been created.
