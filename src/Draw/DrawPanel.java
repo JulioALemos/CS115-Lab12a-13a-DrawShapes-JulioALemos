@@ -1,11 +1,9 @@
 package Draw;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import javax.swing.JPanel;
+import java.awt.geom.*;
+import java.awt.Polygon;
 
 /**
  * Class used to create a DrawPanel where shapes will be drawn by the programer (via code).
@@ -52,9 +50,64 @@ public class DrawPanel extends JPanel {
 		 * Each empty shape should have a different stroke size.
 		 * Be sure all shapes are located such that they can all be seen.
 		 */
-		
 
-		
+		// Added for Lab 6b: Draw Shapes
+
+		// 1. Rectangle
+		g2.setColor(Color.RED); // Standard color: Red
+		g2.setStroke(new BasicStroke(1));
+		g2.drawRect(50, 50, 150, 80);  // horizontal
+		g2.fillRect(250, 50, 80, 150); // vertical
+
+		// 2. Oval
+		g2.setColor(Color.GREEN); // Standard color: Green
+		g2.setStroke(new BasicStroke(2));
+		g2.drawOval(400, 60, 150, 60);  // wide
+		g2.setColor(new Color(0, 255, 0));        // Standard RGB for bright green
+		g2.fillOval(600, 50, 60, 150);  // tall
+
+		// 3. Triangle
+		g2.setColor(Color.BLUE); // Standard color: Blue
+		g2.setStroke(new BasicStroke(3));
+		int[] xT1 = {800, 850, 900};
+		int[] yT1 = {200, 100, 200};
+		g2.drawPolygon(xT1, yT1, 3);  // upright triangle
+
+		int[] xT2 = {1000, 1000, 1100};
+		int[] yT2 = {100, 200, 150};
+		g2.fillPolygon(xT2, yT2, 3);   // right-angled triangle
+
+		// 4. Rounded Rectangle
+		g2.setColor(Color.GREEN.darker()); // Custom color: Dark green
+		g2.setStroke(new BasicStroke(4));
+		RoundRectangle2D rrect = new RoundRectangle2D.Double(50, 300, 150, 80, 30, 30);
+		g2.draw(rrect);
+
+		g2.setTransform(AffineTransform.getRotateInstance(Math.toRadians(25), 300, 330)); // rotate fill
+		RoundRectangle2D rrectFill = new RoundRectangle2D.Double(250, 300, 80, 150, 30, 30);
+		g2.fill(rrectFill);
+		g2.setTransform(new AffineTransform());
+
+		// 5. Circle
+		g2.setColor(new Color(173, 216, 230)); // Custom color: Light blue
+		g2.setStroke(new BasicStroke(5));
+		g2.drawOval(450, 300, 100, 100);  // perfect circle
+		g2.fillOval(600, 300, 120, 80);   // stretched ellipse
+
+		// 6. Diamond
+		g2.setColor(new Color(205, 133, 63)); // Custom color: Brown-orange
+		g2.setStroke(new BasicStroke(6));
+		int[] xDiamond = {850, 900, 850, 800};
+		int[] yDiamond = {300, 350, 400, 350};
+		g2.drawPolygon(xDiamond, yDiamond, 4);  // standard diamond
+
+		int[] xDiamond2 = {1000, 1050, 1000, 950};
+		int[] yDiamond2 = {300, 350, 400, 350};
+		AffineTransform original = g2.getTransform();
+		g2.rotate(Math.toRadians(45), 1000, 350);  // rotated 45°
+		g2.fillPolygon(xDiamond2, yDiamond2, 4); // rotated diamond
+		g2.setTransform(original);  // reset
+
 		
 	}//end of method paintComponent(Graphics)
 
